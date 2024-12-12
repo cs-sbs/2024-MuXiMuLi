@@ -1,77 +1,121 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/vp7WYENx)
-### 课程项目描述：图书管理系统
+# 图书管理系统
 
-**项目目标**：
-本项目要求学生基于面向对象的设计思想，开发一个控制台的图书管理系统。
-系统中将包含多种不同类型的图书，每种图书根据类别有不同的属性和方法。
-学生需要应用类和对象、继承、多态和封装等核心面向对象编程概念，
-并进一步学习多线程、数据库操作和文件流的应用，实现一个可扩展、模块化的图书管理系统。
-本项目使用控制台交互，强化程序的逻辑设计和面向对象编程概念的应用。
+一个基于 Java 的图书管理系统，支持多种类型图书的管理和自动备份功能。
 
+## 功能特性
 
----
+- 支持多种类型图书管理（计算机、文学、科学等）
+- 库存管理
+- 用户管理（管理员/普通用户）
+- 自动备份功能
+- 事务管理
+- 连接池支持
 
-#### 1. **功能要求**
-   - **用户注册和登录**：
-     - 系统需要包含两个用户角色：普通用户和管理员。普通用户可以查看和搜索图书信息，管理员可以增删图书。
-   - **书籍管理**：
-     - 图书添加：能够添加新的图书，包括通用信息（如书名、作者、出版日期等）和特定类别信息。
-     - 图书查询：支持查询图书信息，允许用户根据书名、ISBN等关键字查询，并显示所有相关信息。
-     - 图书删除：支持从系统中删除图书。
-     - 图书分类筛选：按类别展示图书，例如显示所有计算机类、医学类、文学类、法学类等书籍。
-   - **面向对象特性要求**：
-     - 类和对象：创建一个基类，以便支持不同类型图书的扩展。
-     - 继承：设计若干子类，基于图书的不同分类进行继承和扩展。子类需在基类的基础上新增特定属性和方法，以体现不同类型图书的特性。
-     - 封装：所有类的属性需使用封装，确保数据的私密性和安全性。提供适当的访问方法，以控制对类内数据的访问和修改。
-     - 多态：在父类或接口中定义展示信息的方法，要求子类进行具体实现。系统应能通过多态性，调用不同子类的展示方法，输出类型特定的信息。
-   - **文件存储与读取**：使用文件流将图书信息存储为文件，保证系统重新启动时数据的持久化。
-   - **多线程支持**：系统需要实现一个数据定期备份功能，备份操作应在后台独立线程中进行，不影响用户的正常操作。
-   - **数据库支持**：书籍数据应存储在数据库中，学生可以选择MySQL或SQLite数据库。
----
+## 技术栈
 
-#### 2. 交互方式
-- **命令行菜单**：
-   创建一个简洁的控制台菜单，比如：
+- Java 17
+- MySQL 8.0
+- HikariCP
+- Log4j2
+- JUnit 5
+- Jackson
+- Lombok
 
-   ```
-   Welcome to the Book Management System
-   1. Register
-   2. Login
-   3. View Books
-   4. Search Books
-   5. Add a Book（Admin Only）
-   6. Delete a Book（Admin Only）
-   7. Logout
-   8. Exit
-   Please enter your choice: _
-   ```
-   提示用户输入对应数字选择操作，并通过循环保持菜单的持续交互性。
+## 项目结构
 
----
+```
+src/
+├── main/
+│   ├── java/com/library/
+│   │   ├── domain/         # 领域模型
+│   │   ├── repository/     # 数据访问层
+│   │   ├── service/        # 业务逻辑层
+│   │   └── util/          # 工具类
+│   └── resources/
+│       ├── application.properties  # 配置文件
+│       └── sample_data.sql        # 示例数据
+└── test/
+    └── java/com/library/
+        └── service/        # 测试类
+```
 
-#### 3. **高级功能要求**
-   - **多线程**：
-     - 实现一个后台线程，定期将数据库中的书籍数据备份到文件中。
-   - **数据库操作**：
-     - 使用JDBC进行数据库连接、数据增删查改。
-   - **文件流**：
-     - 使用文件流将备份文件进行读取和写入，支持备份文件的恢复功能。
+## 快速开始
 
----
+1. 克隆项目
+2. 配置数据库连接（application.properties）
+3. 执行 sample_data.sql 创建表结构和示例数据
+4. 运行测试确保环境正常
 
-#### 4. **评分标准**
-   - **功能完整性（50%）**：
-     - 基本功能（30%）：用户注册、登录，图书的增删查改功能，控制台界面。
-     - 高级功能（20%）：多线程数据备份、文件存储和读取、数据库操作。
-   - **面向对象设计（30%）**：
-     - 类的设计合理性、继承关系、封装性、多态性的正确使用。
-   - **代码质量（20%）**：
-     - 代码结构清晰，命名规范，注释完整，代码风格符合规范。
+## 配置说明
 
-#### 5. **提交要求**
-   - **项目代码**：包含所有源代码文件，确保可以编译和运行。
-   - **数据库脚本**：提供数据库表的创建脚本及测试数据。
-   - **项目说明文档**：简单说明系统设计、类的结构图、运行方式及功能描述。
-   - **截止日期： 2025-01-05 23:59**
+主要配置文件：`src/main/resources/application.properties`
 
-通过本项目，学生可以全面应用Java的面向对象编程和多线程、数据库操作等高级技术，为今后的Java开发打下坚实基础。
+```properties
+db.url=jdbc:mysql://localhost:3306/library_management
+db.username=your_username
+db.password=your_password
+db.driver=com.mysql.cj.jdbc.Driver
+```
+
+## 测试
+
+运行所有测试：
+```bash
+mvn test
+```
+
+## 备份功能
+
+系统每24小时自动备份一次数据到 JSON 文件：
+- 备份路径：./backup/
+- 文件格式：books_backup_YYYYMMDD_HHMMSS.json
+
+## 构建和运行
+
+1. 构建项目：
+```bash
+mvn clean package
+```
+
+2. 运行项目：
+```bash
+java -jar target/library-management-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
+
+## 开发环境设置
+
+1. 安装必要软件：
+   - JDK 17
+   - MySQL 8.0
+   - Maven 3.8+
+
+2. 配置数据库：
+   - 创建数据库：library_management
+   - 执行 src/main/resources/sample_data.sql
+
+3. 配置应用：
+   - 复制 src/main/resources/application.properties.template 到 application.properties
+   - 修改数据库连接信息
+
+4. 运行测试：
+```bash
+mvn test
+```
+
+## 日志配置
+
+系统使用 log4j 1.x 进行日志管理：
+- 控制台输出：INFO 级别
+- 文件输出：DEBUG 级别（logs/library.log）
+- HikariCP 日志：INFO 级别
+
+配置文件：`src/main/resources/log4j.properties`
+
+## SQL 脚本说明
+
+项目使用 MySQL 数据库，`sample_data.sql` 使用 MySQL 语法。如果您的 IDE 显示 SQL 语法错误，这可能是因为 IDE 使用了 SQL Server 的语法检查器。这些错误可以安全忽略，因为这些是有效的 MySQL 语句。
+
+要正确执行 SQL 脚本：
+1. 确保使用 MySQL 8.0 或更高版本
+2. 使用 MySQL 命令行或 MySQL Workbench 执行脚本
+3. 或者在 IDE 中将 SQL 方言设置为 MySQL
